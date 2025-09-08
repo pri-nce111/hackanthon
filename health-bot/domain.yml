@@ -1,0 +1,37 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - symptoms_inquiry
+  - preventive_measures
+  - vaccination_schedule
+  - outbreak_status
+  - outbreak_subscribe
+  - nlu_fallback
+
+responses:
+  utter_greet:
+    - text: "Hello! I can help with preventive healthcare, symptoms, and vaccinations. (नमस्ते! मैं रोकथाम, लक्षण और टीकाकरण में मदद कर सकता/सकती हूँ.)"
+  utter_goodbye:
+    - text: "Take care! (ख़याल रखें!)"
+  utter_fallback:
+    - text: "Sorry, I didn't get that. Could you rephrase? (माफ़ कीजिए, कृपया दोबारा बताइए.)"
+  utter_ask_disease:
+    - text: "Which disease are you asking about? e.g., dengue, malaria, COVID-19. (आप किस बीमारी के बारे में पूछ रहे हैं?)"
+  utter_preventive_generic:
+    - text: "General prevention: wash hands, safe water, mosquito control, masks if symptomatic. (सामान्य रोकथाम: हाथ धोएँ, स्वच्छ पानी, मच्छर नियंत्रण, लक्षण होने पर मास्क.)"
+  utter_vaccination_info_prompt:
+    - text: "Who is the vaccine info for (age group / category)? (टीका जानकारी किस आयु/श्रेणी के लिए है?)"
+  utter_outbreak_info:
+    - text: "I can check current alerts for your area. Share district/state. (अपना जिला/राज्य बताएँ.)"
+
+actions:
+  - action_vaccination_schedule
+  - action_outbreak_status
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

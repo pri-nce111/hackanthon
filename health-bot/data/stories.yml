@@ -1,0 +1,26 @@
+version: "3.1"
+stories:
+  - story: greet and help
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - story: ask symptoms
+    steps:
+      - intent: symptoms_inquiry
+      - action: utter_ask_disease
+
+  - story: preventive info
+    steps:
+      - intent: preventive_measures
+      - action: utter_preventive_generic
+
+  - story: vaccination schedule
+    steps:
+      - intent: vaccination_schedule
+      - action: action_vaccination_schedule
+
+  - story: outbreak status
+    steps:
+      - intent: outbreak_status
+      - action: action_outbreak_status

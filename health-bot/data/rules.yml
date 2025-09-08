@@ -1,0 +1,11 @@
+version: "3.1"
+rules:
+  - rule: Greet anytime
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Fallback
+    steps:
+      - intent: nlu_fallback
+      - action: utter_fallback

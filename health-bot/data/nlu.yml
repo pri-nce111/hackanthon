@@ -1,0 +1,44 @@
+version: "3.1"
+nlu:
+  - intent: greet
+    examples: |
+      - hello
+      - hi
+      - namaste
+      - नमस्ते
+      - hello bot
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you
+      - अलविदा
+  - intent: symptoms_inquiry
+    examples: |
+      - what are the symptoms of dengue
+      - dengue symptoms
+      - malaria ke lakshan kya hain
+      - मलेरिया के लक्षण
+      - covid symptoms
+  - intent: preventive_measures
+    examples: |
+      - how to prevent dengue
+      - dengue prevention tips
+      - malaria se bachav kaise kare
+      - रोकथाम कैसे करें
+  - intent: vaccination_schedule
+    examples: |
+      - vaccination schedule for 2 year old
+      - vaccine schedule adult
+      - टीकाकरण अनुसूची
+      - covaxin schedule
+  - intent: outbreak_status
+    examples: |
+      - any dengue outbreak in Delhi
+      - current covid cases in mumbai
+      - क्या मेरे जिले में कोई अलर्ट है
+  - intent: outbreak_subscribe
+    examples: |
+      - notify me about outbreaks
+      - subscribe to alerts
+      - मुझे अलर्ट भेजें
