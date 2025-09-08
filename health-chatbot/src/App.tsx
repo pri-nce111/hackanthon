@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import Learn from './pages/Learn'
 import Chat from './pages/Chat'
-import Admin from './pages/Admin'
+import AdminDemo from './pages/AdminDemo'
 import './App.css'
 
 function App() {
@@ -101,7 +101,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<AdminDemo />} />
           </Routes>
         </main>
       </div>
