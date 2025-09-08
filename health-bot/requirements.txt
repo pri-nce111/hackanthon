@@ -1,0 +1,6 @@
+rasa==3.6.15
+rasa-sdk==3.6.2
+python-dotenv==1.0.1
+requests==2.32.3
+uvicorn==0.30.5
+fastapi==0.115.0
