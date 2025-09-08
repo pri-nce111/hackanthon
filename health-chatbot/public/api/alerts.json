@@ -1,0 +1,8 @@
+{
+  "updatedAt": "2025-01-01T10:00:00.000Z",
+  "alerts": [
+    { "id": "ex1", "disease": "Malaria", "district": "Nagpur", "severity": "Medium" },
+    { "id": "ex2", "disease": "Dengue", "district": "Lucknow", "severity": "High" }
+  ]
+}
+

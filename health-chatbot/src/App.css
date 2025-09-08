@@ -1,0 +1,23 @@
+/* Basic layout helpers for the public health chatbot */
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (max-width: 900px) {
+  main {
+    display: block !important;
+  }
+  aside {
+    margin-top: 12px;
+  }
+}
+
+select, textarea, button {
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+}
