@@ -1,0 +1,24 @@
+version: "3.1"
+
+rules:
+  - rule: greet asks language if not set
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_ask_language
+
+  - rule: help
+    steps:
+      - intent: help
+      - action: utter_help
+
+  - rule: thank you
+    steps:
+      - intent: thank_you
+      - action: utter_thank_you
+
+  - rule: fallback
+    steps:
+      - intent: nlu_fallback
+      - action: action_default_fallback
+

@@ -1,0 +1,70 @@
+version: "3.1"
+
+intents:
+  - greet
+  - choose_language
+  - ask_symptoms
+  - ask_prevention
+  - ask_vaccination_schedule
+  - subscribe_alerts
+  - unsubscribe_alerts
+  - affirm
+  - deny
+  - thank_you
+  - help
+  - out_of_scope
+  - nlu_fallback
+
+entities:
+  - disease
+  - age_group
+  - language_code
+
+slots:
+  language:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: language_code
+      - type: from_text
+  disease:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: disease
+
+responses:
+  utter_greet:
+    - text: "Hi! I can help with preventive care, symptoms, and vaccination schedules.\nनमस्ते! मैं रोकथाम देखभाल, लक्षण और टीकाकरण शेड्यूल में मदद कर सकता/सकती हूँ।"
+  utter_ask_language:
+    - text: "Please choose a language: English or Hindi.\nकृपया भाषा चुनें: English या Hindi."
+  utter_language_set:
+    - text: "Language set to {language}.\nभाषा {language} पर सेट कर दी गई है।"
+  utter_ask_disease:
+    - text: "Which disease? (malaria, dengue, covid-19)\nकौन सी बीमारी? (मलेरिया, डेंगू, कोविड-19)"
+  utter_subscribe_prompt:
+    - text: "You will receive outbreak alerts here. To stop, say 'unsubscribe'.\nआपको यहीं पर आउटब्रेक अलर्ट मिलेंगे। बंद करने के लिए 'अनसब्सक्राइब' लिखें।"
+  utter_unsubscribe_prompt:
+    - text: "You have been unsubscribed from alerts.\nआपको अलर्ट से अनसब्सक्राइब कर दिया गया है।"
+  utter_help:
+    - text: "Try asking: 'Symptoms of dengue', 'Malaria prevention', 'Infant vaccination schedule'.\nऐसे पूछें: 'डेंगू के लक्षण', 'मलेरिया की रोकथाम', 'शिशु का टीकाकरण शेड्यूल'।"
+  utter_thank_you:
+    - text: "You're welcome!\nधन्यवाद!"
+  utter_fallback:
+    - text: "Sorry, I didn't understand. Please rephrase.\nक्षमा करें, मैं समझ नहीं पाया/पाई। कृपया दोबारा लिखें।"
+
+actions:
+  - action_set_language
+  - action_provide_symptoms
+  - action_provide_prevention
+  - action_fetch_vaccination_schedule
+  - action_subscribe_alerts
+  - action_unsubscribe_alerts
+  - action_default_fallback
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+

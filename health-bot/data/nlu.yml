@@ -1,0 +1,102 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hi
+      - hello
+      - hey
+      - namaste
+      - नमस्ते
+      - hello there
+
+  - intent: choose_language
+    examples: |
+      - English
+      - Hindi
+      - हिन्दी
+      - I prefer English
+      - Switch to Hindi
+      - भाषा हिंदी
+      - भाषा English
+
+  - intent: ask_symptoms
+    examples: |
+      - what are the symptoms of [dengue](disease)?
+      - symptoms of [malaria](disease)
+      - [covid](disease) symptoms
+      - [dengue](disease) ke lakshan kya hain
+      - [मलेरिया](disease) के लक्षण
+      - [कोविड-19](disease) के लक्षण क्या हैं
+      - [corona](disease) symptoms
+
+  - intent: ask_prevention
+    examples: |
+      - how to prevent [dengue](disease)
+      - [malaria](disease) prevention
+      - prevention for [covid-19](disease)
+      - [डेंगू](disease) से बचाव कैसे करें
+      - [मलेरिया](disease) से बचाव
+      - [कोविड-19](disease) की रोकथाम
+
+  - intent: ask_vaccination_schedule
+    examples: |
+      - vaccination schedule for infant
+      - vaccine schedule for baby
+      - immunization schedule for child
+      - नवजात शिशु का टीकाकरण शेड्यूल
+      - बच्चों का टीकाकरण
+      - adult vaccination schedule
+
+  - intent: subscribe_alerts
+    examples: |
+      - subscribe to outbreak alerts
+      - send me alerts
+      - alert subscription
+      - अलर्ट भेजो
+      - अलर्ट के लिए सब्सक्राइब करें
+
+  - intent: unsubscribe_alerts
+    examples: |
+      - unsubscribe alerts
+      - stop alerts
+      - don't send alerts
+      - अलर्ट बंद करो
+      - अनसब्सक्राइब
+
+  - intent: thank_you
+    examples: |
+      - thanks
+      - thank you
+      - शुक्रिया
+      - धन्यवाद
+
+  - intent: help
+    examples: |
+      - help
+      - what can you do
+      - मुझे मदद चाहिए
+      - how do I use this
+
+  - intent: out_of_scope
+    examples: |
+      - what's the weather like
+      - book a flight
+      - set an alarm
+
+  - synonym: covid-19
+    examples: |
+      - covid
+      - corona
+      - coronavirus
+      - कोविड-19
+      - कोरोना
+
+  - synonym: dengue
+    examples: |
+      - डेंगू
+
+  - synonym: malaria
+    examples: |
+      - मलेरिया
+

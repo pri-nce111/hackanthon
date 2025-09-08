@@ -1,0 +1,100 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: healthbot-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  action-server:
+    image: rasa/rasa-sdk:3.6.2
+    container_name: healthbot-actions
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - GOV_HEALTH_API_BASE=${GOV_HEALTH_API_BASE}
+      - OUTBREAK_API_URL=${OUTBREAK_API_URL}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+    depends_on:
+      - db
+    command: sh -c "pip install -r actions/requirements.txt && rasa run actions --port 5055 --debug"
+    ports:
+      - "5055:5055"
+
+  rasa:
+    image: rasa/rasa:3.6.2-full
+    container_name: healthbot-rasa
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./:/app
+    depends_on:
+      - action-server
+    entrypoint: ["bash", "/app/docker/rasa-entrypoint.sh"]
+    ports:
+      - "5005:5005"
+
+  scheduler:
+    image: python:3.11-slim
+    container_name: healthbot-scheduler
+    restart: unless-stopped
+    working_dir: /app/scheduler
+    volumes:
+      - ./:/app
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - OUTBREAK_API_URL=${OUTBREAK_API_URL}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_SMS_FROM=${TWILIO_SMS_FROM}
+      - TWILIO_WHATSAPP_FROM=${TWILIO_WHATSAPP_FROM}
+      - PREFERRED_CHANNEL=${PREFERRED_CHANNEL}
+      - ALERT_POLL_INTERVAL_SECONDS=${ALERT_POLL_INTERVAL_SECONDS}
+    depends_on:
+      - db
+    command: sh -c "pip install -r requirements.txt && python -u alert_scheduler.py"
+    ports:
+      - "" # no external port
+
+  dashboard:
+    image: python:3.11-slim
+    container_name: healthbot-dashboard
+    restart: unless-stopped
+    working_dir: /app/dashboard
+    volumes:
+      - ./:/app
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=${POSTGRES_PORT}
+    depends_on:
+      - db
+    command: sh -c "pip install -r requirements.txt && uvicorn app:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+
+volumes:
+  db_data:
+
